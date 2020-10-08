@@ -33,7 +33,7 @@ describe('converts to DateOnly', function () {
 		expect(() => DateOnly.fromString('2020-1-10')).toThrow();
 	});
 	it('Date to DateOnly', () => {
-		expect(new DateOnly(2020, 1, 10).toDate()).toEqual(new Date(2020, 1, 10));
+		expect(DateOnly.fromDate(new Date(2020, 1, 10)).toDate()).toEqual(new Date(2020, 1, 10));
 	});
 });
 
