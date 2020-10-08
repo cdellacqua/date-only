@@ -8,13 +8,13 @@
 		"test": "jest",
 		"coverage": "jest --coverage",
 		"build": "rimraf build && tsc",
-		"doc": "rimraf docs && typedoc --disableSources --readme none --mode file --readme none --exclude src/serialize.ts --plugin typedoc-plugin-markdown src/date-only.ts",
+		"doc": "rimraf docs && typedoc --disableSources --readme none --mode file --readme none --plugin typedoc-plugin-markdown src/index.ts",
 		"prepare": "npm run build",
 		"prepublishOnly": "npm test"
 	},
 	"keywords": [
-		"error",
-		"serializable",
+		"date",
+		"dateonly",
 		"json"
 	],
 	"repository": {

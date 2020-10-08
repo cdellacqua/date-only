@@ -3,22 +3,25 @@
 A DateOnly class for JavaScript
 
 ## Full documentation:
-* [DateOnly](https://github.com/cdellacqua/date-only/blob/master/docs/classes/serializableerror.md)
+* [DateOnly](https://github.com/cdellacqua/date-only/blob/master/docs/classes/dateonly.md)
 
 ## Highlights
 
 ###
-Always 
+Always serializes to YYYY-MM-DD
 
-### Exception logging
 ```
-try {
-	someFunctionThatThrows();
-} catch (err) {
-	logger.log(SerializableError.from(err));
-	// or, if it only accepts strings
-	logger.log(JSON.stringify(SerializableError.from(err)));
-	throw err;
-}
+console.log(new DateOnly(2020, 0, 1).toString());
+// -> 2020-01-01
+console.log(new DateOnly(2020, 0, 1).toJSON());
+// -> "2020-01-01"
 ```
 
+Compatible with native Date object
+
+```
+console.log(DateOnly.fromDate(new Date(2020, 0, 1)).toString());
+// -> 2020-01-01
+console.log(new DateOnly(2020, 0, 1).toDate().toDateString());
+// -> Wed Jan 01 2020
+```
