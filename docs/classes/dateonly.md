@@ -261,7 +261,7 @@ ___
 
 ▸ **equals**(`that`: [DateOnly](dateonly.md) | string): *boolean*
 
-Checks whether two DateOnly instances are equals
+Checks whether two DateOnly instances are equal
 
 **Parameters:**
 
@@ -395,7 +395,7 @@ ___
 
 ▸ **equals**(`d1`: [DateOnly](dateonly.md) | string, `d2`: [DateOnly](dateonly.md) | string): *boolean*
 
-Checks whether two DateOnly instances are equals
+Checks whether two DateOnly instances are equal
 
 **Parameters:**
 
