@@ -215,7 +215,7 @@ export class DateOnly {
 	}
 
 	/**
-	 * Checks whether two DateOnly instances are equals
+	 * Checks whether two DateOnly instances are equal
 	 * @param d1 first operand
 	 * @param d2 second operand
 	 */
@@ -227,7 +227,7 @@ export class DateOnly {
 	}
 
 	/**
-	 * Checks whether two DateOnly instances are equals
+	 * Checks whether two DateOnly instances are equal
 	 * @param that the other DateOnly instance or its string representation
 	 */
 	equals(that: DateOnly|string): boolean {
