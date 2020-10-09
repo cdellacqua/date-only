@@ -9,6 +9,16 @@ describe('constructors', function () {
 		const now = new Date();
 		expect(new DateOnly().toString()).toEqual(`${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${(now.getDate()).toString().padStart(2, '0')}`);
 	});
+	it('constructs using a Date', () => {
+		const now = new Date();
+		expect(new DateOnly(now).toString()).toEqual(`${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${(now.getDate()).toString().padStart(2, '0')}`);
+	});
+	it('constructs using a string', () => {
+		expect(new DateOnly('2020-01-01').toString()).toEqual('2020-01-01');
+	});
+	it('constructs using an invalid string', () => {
+		expect(() => new DateOnly('2020-1-01')).toThrow();
+	});
 	it('constructs passing only the year', () => {
 		const now = new Date();
 		expect(new DateOnly(2020).toString()).toEqual(`2020-${(now.getMonth() + 1).toString().padStart(2, '0')}-${(now.getDate()).toString().padStart(2, '0')}`);
@@ -95,5 +105,39 @@ describe('add methods', function () {
 	});
 	it('adds years', () => {
 		expect(dateOnly.addYears(5).toString()).toEqual('2025-01-01');
+	});
+});
+
+
+describe('sub methods', function () {
+	let dateOnly = new DateOnly(2020, 3, 15);
+	it('subs days', () => {
+		expect(dateOnly.subDays(10).toString()).toEqual('2020-04-05');
+	});
+	it('subs months', () => {
+		expect(dateOnly.subMonths(2).toString()).toEqual('2020-02-15');
+	});
+	it('subs years', () => {
+		expect(dateOnly.subYears(5).toString()).toEqual('2015-04-15');
+	});
+});
+
+describe('compare methods', function () {
+	let dateOnly = new DateOnly(2020, 3, 15);
+	it('checks equality', () => {
+		expect(dateOnly.equals('2020-04-15')).toBeTruthy();
+		expect(dateOnly.equals(new DateOnly('2020-04-15'))).toBeTruthy();
+		expect(dateOnly.equals(new DateOnly('2020-04-13'))).toBeFalsy();
+		expect(DateOnly.equals(dateOnly, '2020-04-15')).toBeTruthy();
+		expect(DateOnly.equals(dateOnly.toString(), new DateOnly('2020-04-15'))).toBeTruthy();
+		expect(DateOnly.equals(dateOnly.toString(), new DateOnly('2020-04-13').toString())).toBeFalsy();
+	});
+	it('compares', () => {
+		expect(dateOnly.compare('2020-09-01')).toBeLessThan(0);
+		expect(dateOnly.compare(new DateOnly('2020-09-01'))).toBeLessThan(0);
+		expect(dateOnly.compare('2020-04-15')).toEqual(0);
+		expect(DateOnly.compare(dateOnly, '2020-09-01')).toBeLessThan(0);
+		expect(DateOnly.compare(dateOnly.toString(), new DateOnly('2020-08-01'))).toBeLessThan(0);
+		expect(DateOnly.compare(dateOnly, '2020-04-15')).toEqual(0);
 	});
 });

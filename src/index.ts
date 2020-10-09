@@ -50,24 +50,50 @@ export class DateOnly {
 	 * @param month month
 	 * @param date date
 	 */
+	constructor(year?: number, month?: number, date?: number);
+	/**
+	 * Instantiates a DateOnly object extracting the relevant data from the given Date object
+	 * @param date the reference date
+	 */
+	constructor(date: Date);
+	/**
+	 * Instantiates a DateOnly object from a DateOnly string representation
+	 * @param str the string representation YYYY-MM-DD
+	 */
+	constructor(str: string);
+
 	constructor(
-		year?: number,
+		yearOrDateOrStr?: number|Date|string,
 		month?: number,
 		date?: number,
 	) {
-		const nativeDate = new Date();
-		if (year !== null && year !== undefined) {
-			nativeDate.setFullYear(year);
+		const nativeDate = yearOrDateOrStr instanceof Date ? yearOrDateOrStr : new Date();
+		if (typeof yearOrDateOrStr === "string") {
+			const matches = yearOrDateOrStr.match(DateOnly.regex);
+
+			if (!matches) {
+				throw new SerializableError(`invalid date format ${yearOrDateOrStr}`);
+			}
+
+			this._year = Number(matches[1]);
+			this._month = Number(matches[2]) - 1;
+			this._date = Number(matches[3]);
+		} else {
+			if (!(yearOrDateOrStr instanceof Date)) {
+				if (yearOrDateOrStr !== null && yearOrDateOrStr !== undefined) {
+					nativeDate.setFullYear(yearOrDateOrStr);
+				}
+				if (month !== null && month !== undefined) {
+					nativeDate.setMonth(month);
+				}
+				if (date !== null && date !== undefined) {
+					nativeDate.setDate(date);
+				}
+			}
+			this._year = nativeDate.getFullYear();
+			this._month = nativeDate.getMonth();
+			this._date = nativeDate.getDate();
 		}
-		if (month !== null && month !== undefined) {
-			nativeDate.setMonth(month);
-		}
-		if (date !== null && date !== undefined) {
-			nativeDate.setDate(date);
-		}
-		this._year = nativeDate.getFullYear();
-		this._month = nativeDate.getMonth();
-		this._date = nativeDate.getDate();
 	}
 
 	/**
@@ -75,7 +101,7 @@ export class DateOnly {
 	 * @param date the native Date object
 	 */
 	static fromDate(date: Date): DateOnly {
-		return new DateOnly(date.getFullYear(), date.getMonth(), date.getDate());
+		return new DateOnly(date);
 	}
 
 	/**
@@ -111,6 +137,15 @@ export class DateOnly {
 	}
 
 	/**
+	 * Returns a new DateOnly, its date will be decremented (or incremented)
+	 * by the given amount with respect to the current instance
+	 * @param n the number of days to subtract
+	 */
+	subDays(n: number): DateOnly {
+		return this.addDays(-n);
+	}
+
+	/**
 	 * Returns a new DateOnly, its month will be incremented (or decremented)
 	 * by the given amount with respect to the current instance
 	 * @param n the number of days to add
@@ -119,6 +154,15 @@ export class DateOnly {
 		const curr = this.toDate();
 		curr.setMonth(curr.getMonth() + n);
 		return DateOnly.fromDate(curr);
+	}
+
+	/**
+	 * Returns a new DateOnly, its month will be decremented (or incremented)
+	 * by the given amount with respect to the current instance
+	 * @param n the number of days to subtract
+	 */
+	subMonths(n: number): DateOnly {
+		return this.addMonths(-n);
 	}
 
 	/**
@@ -133,21 +177,20 @@ export class DateOnly {
 	}
 
 	/**
+	 * Returns a new DateOnly, its year will be decremented (or incremented)
+	 * by the given amount with respect to the current instance
+	 * @param n the number of days to subtract
+	 */
+	subYears(n: number): DateOnly {
+		return this.addYears(-n);
+	}
+
+	/**
 	 * Instantiates a DateOnly object given a date string
 	 * @param str a date string matching the format YYYY-MM-DD
 	 */
 	static fromString(str: string): DateOnly {
-		const matches = str.match(DateOnly.regex);
-
-		if (!matches) {
-			throw new SerializableError(`invalid date format ${str}`);
-		}
-
-		return new DateOnly(
-			Number(matches[1]),
-			Number(matches[2]) - 1,
-			Number(matches[3]),
-		);
+		return new DateOnly(str);
 	}
 
 	/**
@@ -173,6 +216,18 @@ export class DateOnly {
 
 	/**
 	 * Checks whether two DateOnly instances are equals
+	 * @param d1 first operand
+	 * @param d2 second operand
+	 */
+	static equals(d1: DateOnly|string, d2: DateOnly|string) {
+		if (typeof d1 === "string") {
+			d1 = new DateOnly(d1);
+		}
+		return d1.equals(d2);
+	}
+
+	/**
+	 * Checks whether two DateOnly instances are equals
 	 * @param that the other DateOnly instance or its string representation
 	 */
 	equals(that: DateOnly|string): boolean {
@@ -182,5 +237,29 @@ export class DateOnly {
 				&& this._date === that.date;
 		}
 		return this.toString() === that.toString();
+	}
+
+
+	/**
+	 * Compares two DateOnly instances
+	 * @param d1 first operand
+	 * @param d2 second operand
+	 */
+	static compare(d1: DateOnly|string, d2: DateOnly|string) {
+		if (typeof d1 === "string") {
+			d1 = new DateOnly(d1);
+		}
+		return d1.compare(d2);
+	}
+
+	/**
+	 * Compares two DateOnly instances
+	 * @param that the other DateOnly instance or its string representation
+	 */
+	compare(that: DateOnly|string): number {
+		if (typeof that === 'string') {
+			that = DateOnly.fromString(that);
+		}
+		return Number(this.toString().replace(/-/g, '')) - Number(that.toString().replace(/-/g, ''));
 	}
 }

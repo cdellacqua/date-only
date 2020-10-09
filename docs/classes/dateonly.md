@@ -33,12 +33,18 @@ A DateOnly class for JavaScript
 * [addMonths](dateonly.md#addmonths)
 * [addYears](dateonly.md#addyears)
 * [clone](dateonly.md#clone)
+* [compare](dateonly.md#compare)
 * [equals](dateonly.md#equals)
 * [getDay](dateonly.md#getday)
 * [getTime](dateonly.md#gettime)
+* [subDays](dateonly.md#subdays)
+* [subMonths](dateonly.md#submonths)
+* [subYears](dateonly.md#subyears)
 * [toDate](dateonly.md#todate)
 * [toJSON](dateonly.md#tojson)
 * [toString](dateonly.md#tostring)
+* [compare](dateonly.md#static-compare)
+* [equals](dateonly.md#static-equals)
 * [fromDate](dateonly.md#static-fromdate)
 * [fromString](dateonly.md#static-fromstring)
 
@@ -59,6 +65,30 @@ Name | Type | Description |
 `year?` | undefined &#124; number | year |
 `month?` | undefined &#124; number | month |
 `date?` | undefined &#124; number | date  |
+
+**Returns:** *[DateOnly](dateonly.md)*
+
+\+ **new DateOnly**(`date`: Date): *[DateOnly](dateonly.md)*
+
+Instantiates a DateOnly object extracting the relevant data from the given Date object
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`date` | Date | date  |
+
+**Returns:** *[DateOnly](dateonly.md)*
+
+\+ **new DateOnly**(`str`: string): *[DateOnly](dateonly.md)*
+
+Instantiates a DateOnly object from a DateOnly string representation
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`str` | string | the string representation YYYY-MM-DD  |
 
 **Returns:** *[DateOnly](dateonly.md)*
 
@@ -211,6 +241,22 @@ Clones the current instance
 
 ___
 
+###  compare
+
+▸ **compare**(`that`: [DateOnly](dateonly.md) | string): *number*
+
+Compares two DateOnly instances
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`that` | [DateOnly](dateonly.md) &#124; string | the other DateOnly instance or its string representation  |
+
+**Returns:** *number*
+
+___
+
 ###  equals
 
 ▸ **equals**(`that`: [DateOnly](dateonly.md) | string): *boolean*
@@ -247,6 +293,57 @@ Gets the timestamp of the current instance
 
 ___
 
+###  subDays
+
+▸ **subDays**(`n`: number): *[DateOnly](dateonly.md)*
+
+Returns a new DateOnly, its date will be decremented (or incremented)
+by the given amount with respect to the current instance
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`n` | number | the number of days to subtract  |
+
+**Returns:** *[DateOnly](dateonly.md)*
+
+___
+
+###  subMonths
+
+▸ **subMonths**(`n`: number): *[DateOnly](dateonly.md)*
+
+Returns a new DateOnly, its month will be decremented (or incremented)
+by the given amount with respect to the current instance
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`n` | number | the number of days to subtract  |
+
+**Returns:** *[DateOnly](dateonly.md)*
+
+___
+
+###  subYears
+
+▸ **subYears**(`n`: number): *[DateOnly](dateonly.md)*
+
+Returns a new DateOnly, its year will be decremented (or incremented)
+by the given amount with respect to the current instance
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`n` | number | the number of days to subtract  |
+
+**Returns:** *[DateOnly](dateonly.md)*
+
+___
+
 ###  toDate
 
 ▸ **toDate**(): *Date*
@@ -274,6 +371,40 @@ ___
 Returns a string representing the current DateOnly, using the format YYYY-MM-DD
 
 **Returns:** *string*
+
+___
+
+### `Static` compare
+
+▸ **compare**(`d1`: [DateOnly](dateonly.md) | string, `d2`: [DateOnly](dateonly.md) | string): *number*
+
+Compares two DateOnly instances
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`d1` | [DateOnly](dateonly.md) &#124; string | first operand |
+`d2` | [DateOnly](dateonly.md) &#124; string | second operand  |
+
+**Returns:** *number*
+
+___
+
+### `Static` equals
+
+▸ **equals**(`d1`: [DateOnly](dateonly.md) | string, `d2`: [DateOnly](dateonly.md) | string): *boolean*
+
+Checks whether two DateOnly instances are equals
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`d1` | [DateOnly](dateonly.md) &#124; string | first operand |
+`d2` | [DateOnly](dateonly.md) &#124; string | second operand  |
+
+**Returns:** *boolean*
 
 ___
 
