@@ -42,6 +42,7 @@ A DateOnly class for JavaScript
 * [subYears](dateonly.md#subyears)
 * [toDate](dateonly.md#todate)
 * [toJSON](dateonly.md#tojson)
+* [toLocaleString](dateonly.md#tolocalestring)
 * [toString](dateonly.md#tostring)
 * [compare](dateonly.md#static-compare)
 * [equals](dateonly.md#static-equals)
@@ -359,6 +360,23 @@ ___
 ▸ **toJSON**(): *string*
 
 Returns a string representing the current DateOnly, using the format YYYY-MM-DD
+
+**Returns:** *string*
+
+___
+
+###  toLocaleString
+
+▸ **toLocaleString**(`locales?`: string[] | string, `options?`: Intl.DateTimeFormatOptions): *string*
+
+Returns a string representing the current instance using the native toLocaleDateString of the Date type
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`locales?` | string[] &#124; string | an array of locales or a specific locale |
+`options?` | Intl.DateTimeFormatOptions | the Intl.DateFormatOptions object  |
 
 **Returns:** *string*
 
