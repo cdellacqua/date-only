@@ -215,6 +215,15 @@ export class DateOnly {
 	}
 
 	/**
+	 * Returns a string representing the current instance using the native toLocaleDateString of the Date type
+	 * @param locales an array of locales or a specific locale
+	 * @param options the Intl.DateFormatOptions object
+	 */
+	toLocaleString(locales?: string[]|string, options?: Intl.DateTimeFormatOptions) {
+		return this.toDate().toLocaleDateString(locales, options);
+	}
+
+	/**
 	 * Checks whether two DateOnly instances are equal
 	 * @param d1 first operand
 	 * @param d2 second operand
