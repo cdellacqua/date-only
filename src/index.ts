@@ -1,5 +1,3 @@
-import { SerializableError } from '@cdellacqua/serializable-error';
-
 /**
  * A DateOnly class for JavaScript
  */
@@ -72,7 +70,7 @@ export class DateOnly {
 			const matches = yearOrDateOrStr.match(DateOnly.regex);
 
 			if (!matches) {
-				throw new SerializableError(`invalid date format ${yearOrDateOrStr}`);
+				throw new Error(`invalid date format ${yearOrDateOrStr}`);
 			}
 
 			this._year = Number(matches[1]);
