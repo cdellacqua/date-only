@@ -1,9 +1,9 @@
 {
 	"name": "@cdellacqua/date-only",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"description": "A DateOnly class for JavaScript",
 	"types": "build/index.d.ts",
-  "main": "build/index.cjs.js",
+	"main": "build/index.cjs.js",
 	"module": "build/index.esm.js",
 	"type": "module",
 	"scripts": {
