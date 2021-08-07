@@ -2,6 +2,11 @@
 
 A DateOnly class for JavaScript
 
+
+[NPM Package](https://www.npmjs.com/package/@cdellacqua/date-only)
+
+`npm install @cdellacqua/date-only`
+
 ## Full documentation:
 * [DateOnly](https://github.com/cdellacqua/date-only/blob/master/docs/classes/dateonly.md)
 
